@@ -1,0 +1,98 @@
+.product_registration {
+    width: 50%;
+
+    .form_Container {
+        min-width: 30%;
+        // min-width: 250px;
+        padding: 40px;
+        background: rgb(216 209 209 / 53%);
+        box-sizing: border-box;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+        border-radius: 20px;
+        margin-bottom: 25px;
+
+        .user-box {
+            position: relative;
+
+            input,
+            select {
+
+                width: 100%;
+                padding: 10px 0;
+                font-size: 16px;
+                margin-bottom: 30px;
+                border: none;
+                border-bottom: 1px solid black;
+                outline: none;
+                background: transparent;
+
+                ::selection {
+                    background: transparent;
+                    color: inherit;
+                }
+            }
+
+            label {
+                position: absolute;
+                top: -20px;
+                left: 0;
+                padding: 10px 0;
+                font-size: 16px;
+                color: black;
+                pointer-events: none;
+                transition: .5s;
+            }
+
+        }
+
+        .submit_button {
+            position: relative;
+            padding: 1px;
+            width: 100%;
+            border: 1px solid black;
+            border-radius: 15px;
+            background: transparent;
+            transition: color 0.5s ease;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                border-radius: 15px;
+                background: #c0b3b3;
+                transition: 0.5s;
+                transition-timing-function: ease;
+                transform-origin: 0 0;
+                transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7);
+                transform: scaleY(0);
+
+            }
+
+            &:hover {
+                transition: color 1s ease;
+                transition: all 0.3s ease;
+                color: black;
+                font-weight: 500;
+                transform: scale(1);
+                border: none;
+
+                &::before {
+                    transform: scale(1);
+                }
+            }
+        }
+    }
+
+    @media (max-width:900px) {
+        width: 80%;
+    }
+
+    @media (max-width:600px) {
+        width: 90%;
+    }
+
+}
