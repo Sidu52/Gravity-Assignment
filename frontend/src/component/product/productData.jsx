@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import './prouctData.scss'
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
+import { useSelector, useDispatch } from 'react-redux';
+import { setproduct, deleteproduct } from '../../store/store';
 
 function ProductData() {
     const user = localStorage.getItem('localuser');
     const storedUser = JSON.parse(user);
-    const [productData, setProductData] = useState([]);
+    // Redux hook
+    const productData = useSelector((state) => state.product); // Get the product data from Redux store
+    const dispatch = useDispatch();
 
-    async function fetchdata() {
-        const response = await axios.get('http://localhost:9000/product/data')
-        if (response.data) {
-            setProductData(response.data.data);
-        }
-    }
+
     useEffect(() => {
+        async function fetchdata() {
+            const response = await axios.get('http://localhost:9000/product/data')
+            if (response.data) {
+                // setProductData(response.data.data);
+                dispatch(setproduct(response.data.data));
+            }
+        }
         fetchdata();
     }, []);
 
@@ -22,9 +29,12 @@ function ProductData() {
         e.preventDefault();
         try {
             const response = await axios.post(`http://localhost:9000/product/delete/${id}`)
-            console.log(response.data.message);
-            fetchdata();
-
+            if (response.data) {
+                toast.success(response.data.message);
+                dispatch(deleteproduct(id))
+            } else {
+                toast.error(response.data.message);
+            }
         } catch (err) {
             console.log("Error", err)
         }

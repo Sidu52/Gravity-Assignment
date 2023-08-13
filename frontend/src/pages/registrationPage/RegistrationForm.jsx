@@ -41,6 +41,7 @@ function RegistrationForm() {
                         type='email'
                         value={form.email}
                         name='email'
+                        required
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
                     ></input>
                 </div>
@@ -50,6 +51,7 @@ function RegistrationForm() {
                         type='name'
                         value={form.name}
                         name='name'
+                        required
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
                     ></input>
                 </div>
@@ -59,6 +61,7 @@ function RegistrationForm() {
                         type='mobile'
                         value={form.mobile}
                         name='mobile'
+                        required
                         onChange={(e) => setForm({ ...form, mobile: e.target.value })}
                     ></input>
                 </div>
@@ -68,6 +71,7 @@ function RegistrationForm() {
                         type='password'
                         value={form.password}
                         name='password'
+                        required
                         onChange={(e) => setForm({ ...form, password: e.target.value })}
                     ></input>
                 </div>
@@ -77,6 +81,7 @@ function RegistrationForm() {
                         type='date'
                         value={form.date}
                         name='date'
+                        required
                         onChange={(e) => setForm({ ...form, DOB: e.target.value })}
                     ></input>
                 </div>

@@ -29,6 +29,7 @@ function LoginForm() {
 
 
         } catch (err) {
+            toast.warn("User not found");
             console.error("User Not Login", err);
         }
         setForm({ email: "", password: "" })
@@ -44,6 +45,7 @@ function LoginForm() {
                         type='email'
                         value={form.email}
                         name='email'
+                        required
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
                     ></input>
                 </div>
@@ -53,6 +55,7 @@ function LoginForm() {
                         type='password'
                         value={form.password}
                         name='password'
+                        required
                         onChange={(e) => setForm({ ...form, password: e.target.value })}
                     ></input>
                 </div>

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import './productRegistrationForm.scss';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { addproduct } from '../../store/store';
 
 
 function productRegistrationForm() {
@@ -14,6 +16,9 @@ function productRegistrationForm() {
         underWarranty: 'Yes', // Default value
     });
 
+    // Redux dispatch hook
+    const dispatch = useDispatch();
+
     const handleProductSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -22,8 +27,12 @@ function productRegistrationForm() {
             const storedUser = JSON.parse(user);
 
             const response = await axios.post('http://localhost:9000/product/add', { product: productForm, id: storedUser.id })
-            toast.success(response.data.message);
-
+            if (response.data) {
+                toast.success(response.data.message);
+                dispatch(addproduct(response.data.data))
+            } else {
+                toast.error(response.data.message);
+            }
         } catch (err) {
             console.error("User Not Register", err);
         }
