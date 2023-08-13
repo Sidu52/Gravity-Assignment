@@ -10,7 +10,6 @@ const createUser = `
         password varchar(220),
         dob DATE NOT NULL
     )
-
 `;
 
 //Create Table for product
@@ -23,7 +22,6 @@ const createProduct = `
         purchase_date DATE NOT NULL,
         company VARCHAR(255) NOT NULL,
         under_warranty ENUM('yes','no')NOT NULL )
-
 `;
 
 // Execute queries

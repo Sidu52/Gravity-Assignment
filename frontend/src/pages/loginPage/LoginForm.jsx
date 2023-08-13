@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-
 function LoginForm() {
     const navigate = useNavigate();
     const [form, setForm] = useState({
@@ -11,7 +10,7 @@ function LoginForm() {
         password: "",
     })
 
-    //handleSubmit
+    //Handle user signin oprtion
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {

@@ -4,7 +4,7 @@ const auth = require('../config/auth');
 const { dashboard, productsdata, addproduct, deleteProduct } = require('../controllers/productController');
 
 router.get('/', auth, dashboard);
-router.get('/data', productsdata);
+router.get('/data/:id', productsdata);
 router.post('/add', addproduct);
 router.post('/delete/:id', deleteProduct);
 

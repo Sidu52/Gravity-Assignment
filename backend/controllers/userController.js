@@ -2,6 +2,8 @@ require('dotenv').config();
 const db = require('../config/mysql');
 const bycrpt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+
+//My SQL querys
 const queries = {
     adduser: `INSERT INTO ${process.env.MYSQL_DATABASE}.user(email,name,mobile,password,DOB) VALUES (?,?,?,?,?);`,
     readuser: `SELECT * FROM ${process.env.MYSQL_DATABASE}.user WHERE email=?`

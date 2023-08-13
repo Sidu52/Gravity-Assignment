@@ -40,7 +40,9 @@
                 font-size: 16px;
                 color: black;
                 pointer-events: none;
-                transition: .5s;
+                transition: 0.5s;
+                white-space: nowrap;
+
             }
 
         }
@@ -93,6 +95,10 @@
 
     @media (max-width:600px) {
         width: 90%;
+
+        h1 {
+            margin-top: 40px;
+        }
     }
 
 }

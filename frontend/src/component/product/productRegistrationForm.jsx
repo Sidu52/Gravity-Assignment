@@ -19,6 +19,7 @@ function productRegistrationForm() {
     // Redux dispatch hook
     const dispatch = useDispatch();
 
+    //Handle add product opration
     const handleProductSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -38,6 +39,7 @@ function productRegistrationForm() {
         }
         setProductForm({ productName: '', category: '', purchaseDate: '', company: '', underWarranty: 'Yes', })
     };
+
     return (
         <div className="product_registration main_container">
             <h1>Product Registration</h1>

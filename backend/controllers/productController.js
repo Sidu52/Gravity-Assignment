@@ -1,9 +1,9 @@
 require('dotenv').config();
 const db = require('../config/mysql');
 
-
+//My SQL query
 const queries = {
-    getAllData: `SELECT * FROM ${process.env.MYSQL_DATABASE}.product`,
+    getAllData: `SELECT * FROM ${process.env.MYSQL_DATABASE}.product WHERE user_id=?`,
     getProduct: `SELECT * FROM ${process.env.MYSQL_DATABASE}.product WHERE id=?`,
     addProduct: `INSERT INTO ${process.env.MYSQL_DATABASE}.product(user_id,name,category,purchase_date,company,under_warranty) VALUES (?,?,?,?,?,?);`,
     deleteProduct: `DELETE FROM ${process.env.MYSQL_DATABASE}.product WHERE id=?`
@@ -19,8 +19,9 @@ async function dashboard(req, res) {
 //Get ProductData from DataBase
 async function productsdata(req, res) {
     try {
+        const { id } = req.params;
         //GET DATA
-        db.query(queries.getAllData, (err, result) => {
+        db.query(queries.getAllData, [id], (err, result) => {
             if (err) {
                 return res.status(500).json({
                     message: "Error When Data Found",

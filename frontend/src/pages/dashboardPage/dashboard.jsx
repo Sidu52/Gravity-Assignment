@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { ProductRegistrationForm, ProductData } from '../../component/product/index';
 
 function dashboard() {
-    const navigate = useNavigate();
+    const navigate = useNavigate();//useNavigate for redirect one page to another
+
     useEffect(() => {
         async function fetchdata() {
             const token = localStorage.getItem('jwtToken');
@@ -19,19 +20,20 @@ function dashboard() {
                     navigate('/login');
                 }
             } else {
-                toast.warn("Token Not Found Plz Login")
                 navigate('/login');
             }
         }
         fetchdata();
     }, []);
 
+    //Handle Logout opration
     const handlelogout = (e) => {
         e.preventDefault();
         localStorage.removeItem('localuser');
         localStorage.removeItem('jwtToken');
         navigate('/login')
     }
+
     return (
         <div className="dashboard">
             <div className='productform_container'>

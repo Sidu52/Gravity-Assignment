@@ -4,9 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-
 function RegistrationForm() {
-
     const [form, setForm] = useState({
         email: "",
         name: "",
@@ -14,18 +12,18 @@ function RegistrationForm() {
         password: "",
         DOB: "",
     })
-
-    //handleSubmit
+    //Handle user registraion opration
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:9000/user/register', form)
             if (response.data) {
                 toast.success(response.data.message);
+            } else {
+                toast.warn(response.data.message);
             }
-            toast.warn(response.data.message);
-
         } catch (err) {
+            toast.warn("Server Down");
             console.error("User Not Register", err);
         }
         setForm({ email: "", name: "", mobile: "", password: "", DOB: "", })
@@ -43,7 +41,7 @@ function RegistrationForm() {
                         name='email'
                         required
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    ></input>
+                    />
                 </div>
                 <div className="user_box">
                     <label htmlFor="email">Name</label>
@@ -53,7 +51,7 @@ function RegistrationForm() {
                         name='name'
                         required
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    ></input>
+                    />
                 </div>
                 <div className="user_box">
                     <label htmlFor="mobile">mobile</label>
@@ -62,8 +60,11 @@ function RegistrationForm() {
                         value={form.mobile}
                         name='mobile'
                         required
-                        onChange={(e) => setForm({ ...form, mobile: e.target.value })}
-                    ></input>
+                        onChange={(e) => {
+                            const numvalue = parseFloat(e.target.value);
+                            setForm({ ...form, mobile: isNaN(numvalue) ? "" : numvalue })
+                        }}
+                    />
                 </div>
                 <div className="user_box">
                     <label htmlFor="password">password</label>
@@ -73,7 +74,7 @@ function RegistrationForm() {
                         name='password'
                         required
                         onChange={(e) => setForm({ ...form, password: e.target.value })}
-                    ></input>
+                    />
                 </div>
                 <div className="user_box">
                     <label htmlFor="date">DOB</label>
@@ -83,7 +84,7 @@ function RegistrationForm() {
                         name='date'
                         required
                         onChange={(e) => setForm({ ...form, DOB: e.target.value })}
-                    ></input>
+                    />
                 </div>
                 <button className='submit_button'>Submit</button>
                 <p style={{ textAlign: "center", marginTop: "10px" }}>If you already Signup.. <Link to="/login">Click here</Link></p>

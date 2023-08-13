@@ -7,8 +7,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setproduct, deleteproduct } from '../../store/store';
 
 function ProductData() {
+    //Get data from localStorge
     const user = localStorage.getItem('localuser');
-    const storedUser = JSON.parse(user);
+    const storedUser = JSON.parse(user);//Change localstorage data in json formate
     // Redux hook
     const productData = useSelector((state) => state.product); // Get the product data from Redux store
     const dispatch = useDispatch();
@@ -16,7 +17,8 @@ function ProductData() {
 
     useEffect(() => {
         async function fetchdata() {
-            const response = await axios.get('http://localhost:9000/product/data')
+            console.log(storedUser.id)
+            const response = await axios.get(`http://localhost:9000/product/data/${storedUser.id}`)
             if (response.data) {
                 // setProductData(response.data.data);
                 dispatch(setproduct(response.data.data));
@@ -25,6 +27,7 @@ function ProductData() {
         fetchdata();
     }, []);
 
+    //Handle product delete opration
     const handleDelete = async (e, id) => {
         e.preventDefault();
         try {
@@ -47,7 +50,6 @@ function ProductData() {
                 {productData.map((product, index) => (
                     <div key={index} className='cartItem'>
                         <MdOutlineDeleteOutline
-                            style={{ display: storedUser.id === product.user_id ? "block" : "none" }}
                             onClick={((e) => handleDelete(e, product.id))} />
                         <h3>{product.name}</h3>
                         <p>Company: {product.company}</p>

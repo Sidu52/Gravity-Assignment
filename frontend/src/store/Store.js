@@ -8,16 +8,19 @@ const initialState = {
 // Create a datareducer slice using createSlice from Redux Toolkit
 const datareducer = createSlice({
     name: 'user',// Name of the slice
-    initialState: initialState,// Initial state
+    initialState: initialState,
     reducers: {
+        //Set all product inside product
         setproduct: (state, action) => {
             const data = action.payload;
             state.product = data;
         },
+        //Add product inside product
         addproduct: (state, action) => {
             const data = action.payload;
-            state.product.push(data) // Update the loading state with the payload
+            state.product.push(data)
         },
+        //Delete product from product
         deleteproduct: (state, action) => {
             const data = action.payload;
             state.product = state.product.filter(product => product.id !== data);
